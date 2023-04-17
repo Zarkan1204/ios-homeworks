@@ -9,21 +9,42 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-     var post: Post = Post(title: "Мой пост")
-
-
-    private lazy var postButton: UIButton = {
+    var post: Post = Post(title: "Мой пост")
+    
+    
+    private lazy var firstButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Post", for: .normal)
+        button.setTitle("First Button", for: .normal)
         button.tintColor = .white
         button.backgroundColor = #colorLiteral(red: 0.639077723, green: 0.2492567599, blue: 0.6254395843, alpha: 1)
         button.layer.cornerRadius = 20
         button.titleLabel?.font = UIFont(name: "Avenir Next", size: 25)
-        button.addTarget(self, action: #selector(tapPostButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapFirstButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    private lazy var secondButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Second Button", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = #colorLiteral(red: 0.639077723, green: 0.2492567599, blue: 0.6254395843, alpha: 1)
+        button.layer.cornerRadius = 20
+        button.titleLabel?.font = UIFont(name: "Avenir Next", size: 25)
+        button.addTarget(self, action: #selector(tapSecondButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,10 +56,18 @@ class FeedViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .white
         
-        view.addSubview(postButton)
-     }
+        view.addSubview(buttonsStackView)
+        buttonsStackView.addArrangedSubview(firstButton)
+        buttonsStackView.addArrangedSubview(secondButton)
+    }
     
-    @objc func tapPostButton() {
+    @objc private func tapFirstButton() {
+        let postViewController = PostViewController()
+        postViewController.post = post
+        navigationController?.pushViewController(postViewController, animated: true)
+    }
+    
+    @objc private func tapSecondButton() {
         let postViewController = PostViewController()
         postViewController.post = post
         navigationController?.pushViewController(postViewController, animated: true)
@@ -47,12 +76,14 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController {
     
-   private func setConstraints() {
+    private func setConstraints() {
         NSLayoutConstraint.activate([
-            postButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            postButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            postButton.widthAnchor.constraint(equalToConstant: 150),
-            postButton.heightAnchor.constraint(equalToConstant: 50),
+            buttonsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            firstButton.widthAnchor.constraint(equalToConstant: 200),
+            firstButton.heightAnchor.constraint(equalToConstant: 50),
+            secondButton.widthAnchor.constraint(equalToConstant: 200),
+            secondButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
 }

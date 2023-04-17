@@ -45,6 +45,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA5931B329E935F100D35858 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD3E6B29DFE77A00694109 /* AppDelegate.swift */,
+				FAFD3E6D29DFE77A00694109 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		FA5931B429E9360E00D35858 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD3E7429DFE77D00694109 /* Assets.xcassets */,
+				FAFD3E7629DFE77D00694109 /* LaunchScreen.storyboard */,
+				FAFD3E7929DFE77D00694109 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		FAD7843B29E68BE200C9327C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,16 +92,13 @@
 		FAFD3E6A29DFE77A00694109 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				FA5931B329E935F100D35858 /* Application */,
 				FAD7843B29E68BE200C9327C /* Profile */,
-				FAFD3E6B29DFE77A00694109 /* AppDelegate.swift */,
-				FAFD3E6D29DFE77A00694109 /* SceneDelegate.swift */,
 				FA7394B429E03F810058214E /* PostViewController.swift */,
 				FA2F672C29E0601800665363 /* Post.swift */,
 				FA7394B229E036500058214E /* FeedViewController.swift */,
 				FA2F672E29E0642200665363 /* InfoViewController.swift */,
-				FAFD3E7429DFE77D00694109 /* Assets.xcassets */,
-				FAFD3E7629DFE77D00694109 /* LaunchScreen.storyboard */,
-				FAFD3E7929DFE77D00694109 /* Info.plist */,
+				FA5931B429E9360E00D35858 /* SupportingFiles */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -305,7 +321,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UM9F85RKC2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = Navigation/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -335,7 +351,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UM9F85RKC2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_FILE = Navigation/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
