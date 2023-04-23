@@ -16,7 +16,7 @@ class FeedViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("First Button", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = #colorLiteral(red: 0.639077723, green: 0.2492567599, blue: 0.6254395843, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
         button.layer.cornerRadius = 20
         button.titleLabel?.font = UIFont(name: "Avenir Next", size: 25)
         button.addTarget(self, action: #selector(tapFirstButton), for: .touchUpInside)
@@ -28,7 +28,7 @@ class FeedViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Second Button", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = #colorLiteral(red: 0.639077723, green: 0.2492567599, blue: 0.6254395843, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
         button.layer.cornerRadius = 20
         button.titleLabel?.font = UIFont(name: "Avenir Next", size: 25)
         button.addTarget(self, action: #selector(tapSecondButton), for: .touchUpInside)

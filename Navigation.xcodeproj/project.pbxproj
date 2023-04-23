@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FA2F672D29E0601800665363 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F672C29E0601800665363 /* Post.swift */; };
 		FA2F672F29E0642200665363 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F672E29E0642200665363 /* InfoViewController.swift */; };
+		FA461F8B29F00EBA00428BCA /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA461F8A29F00EBA00428BCA /* LogInViewController.swift */; };
 		FA7394B129E0363A0058214E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7394B029E0363A0058214E /* ProfileViewController.swift */; };
 		FA7394B329E036500058214E /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7394B229E036500058214E /* FeedViewController.swift */; };
 		FA7394B529E03F810058214E /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7394B429E03F810058214E /* PostViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		FA2F672C29E0601800665363 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FA2F672E29E0642200665363 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		FA461F8A29F00EBA00428BCA /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		FA7394B029E0363A0058214E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FA7394B229E036500058214E /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		FA7394B429E03F810058214E /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			children = (
 				FA7394B029E0363A0058214E /* ProfileViewController.swift */,
 				FAD7843C29E68C0800C9327C /* ProfileHeaderView.swift */,
+				FA461F8A29F00EBA00428BCA /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			files = (
 				FAFD3E6C29DFE77A00694109 /* AppDelegate.swift in Sources */,
 				FA7394B329E036500058214E /* FeedViewController.swift in Sources */,
+				FA461F8B29F00EBA00428BCA /* LogInViewController.swift in Sources */,
 				FA7394B129E0363A0058214E /* ProfileViewController.swift in Sources */,
 				FA2F672F29E0642200665363 /* InfoViewController.swift in Sources */,
 				FA2F672D29E0601800665363 /* Post.swift in Sources */,

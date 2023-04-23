@@ -38,7 +38,7 @@ class ProfileHeaderView: UIView {
         let button = UIButton(type: .system)
         button.setTitle("Show status", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = .blue
+        button.backgroundColor = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
         button.layer.cornerRadius = 15
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
@@ -61,7 +61,7 @@ class ProfileHeaderView: UIView {
         return label
     }()
     
-    private let statusTextField: UITextField = {
+    private lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 15
@@ -71,6 +71,8 @@ class ProfileHeaderView: UIView {
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.black.cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        textField.addTarget(self, action: #selector(hideKeyboard), for: .editingDidEndOnExit)
         return textField
     }()
     
@@ -93,8 +95,6 @@ class ProfileHeaderView: UIView {
         addSubview(statusButton)
         addSubview(statusLabel)
         addSubview(statusTextField)
-        statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        statusTextField.addTarget(self, action: #selector(hideKeyboard), for: .editingDidEndOnExit)
     }
     
     @objc private func buttonPressed() {
