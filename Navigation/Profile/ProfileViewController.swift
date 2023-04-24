@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Profile Button", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = .blue
+        button.backgroundColor = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
         button.titleLabel?.font = UIFont(name: "Avenir Next", size: 25)
         button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemGray6
         view.addSubview(profileHeaderView)
         view.addSubview(profileButton)
     }

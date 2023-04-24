@@ -23,18 +23,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedViewController.tabBarItem.title = "News"
         feedViewController.tabBarItem.image = UIImage(named: "лента")
         
-        let profileViewController = ProfileViewController()
-        let profileNavigationViewController = UINavigationController(rootViewController: profileViewController)
+        let logInViewController = LogInViewController()
+        let profileNavigationViewController = UINavigationController(rootViewController: logInViewController)
         profileNavigationViewController.tabBarItem.title = "Profile"
         profileNavigationViewController.tabBarItem.image = UIImage(named: "профиль")
+        profileNavigationViewController.navigationBar.isHidden = true
+        
         
         let tabViewController = UITabBarController()
         tabViewController.viewControllers = [feedNavigationViewController, profileNavigationViewController]
-        tabViewController.tabBar.backgroundColor = #colorLiteral(red: 0.639077723, green: 0.2492567599, blue: 0.6254395843, alpha: 1)
-        tabViewController.tabBar.unselectedItemTintColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
+        tabViewController.tabBar.backgroundColor = .systemGray6
+        tabViewController.tabBar.unselectedItemTintColor = .gray
         tabViewController.tabBar.layer.borderWidth = 0.5
         tabViewController.tabBar.layer.borderColor = UIColor.gray.cgColor
-        tabViewController.tabBar.tintColor = .white
+        tabViewController.tabBar.tintColor = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
         
         window.rootViewController = tabViewController
         self.window = window
