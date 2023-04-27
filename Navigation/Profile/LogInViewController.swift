@@ -47,6 +47,13 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.lightGray
+        return view
+    }()
+    
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
@@ -114,13 +121,13 @@ class LogInViewController: UIViewController {
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             scrollView.contentInset.bottom = keyboardSize.height
         }
     }
-    
+
     @objc private func keyboardWillHide() {
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
@@ -133,6 +140,7 @@ class LogInViewController: UIViewController {
         contentView.addSubview(logoImageView)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(loginTextField)
+        stackView.addArrangedSubview(separatorView)
         stackView.addArrangedSubview(passwordTextField)
         contentView.addSubview(loginButton)
     }
@@ -169,12 +177,17 @@ extension LogInViewController {
             stackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            stackView.heightAnchor.constraint(equalToConstant: 100),
+            stackView.heightAnchor.constraint(equalToConstant: 100.5),
             
             loginTextField.topAnchor.constraint(equalTo: stackView.topAnchor),
             loginTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0),
             loginTextField.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 0),
             loginTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            separatorView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0),
+            separatorView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 0),
+            separatorView.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
             
             passwordTextField.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0),
