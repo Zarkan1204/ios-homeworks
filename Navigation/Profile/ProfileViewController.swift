@@ -9,51 +9,107 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private var profileHeaderView = ProfileHeaderView()
+    private let model = Post.makeModel()
     
-    private lazy var profileButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Profile Button", for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = #colorLiteral(red: 0.2823529412, green: 0.5215686275, blue: 0.8, alpha: 1)
-        button.titleLabel?.font = UIFont(name: "Avenir Next", size: 25)
-        button.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.dataSource = self
+        tableView.delegate = self
+        return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Profile"
+        view.backgroundColor = .systemGray6
         setupViews()
         setConstrains()
-        
     }
     
     private func setupViews() {
-        view.backgroundColor = .systemGray6
-        view.addSubview(profileHeaderView)
-        view.addSubview(profileButton)
-    }
-    
-    @objc private func profileButtonTapped() {
-        print("Tap")
+        view.addSubview(tableView)
+        let headerView = ProfileHeaderView()
+        tableView.setTableHeaderView(header: headerView)
     }
 }
- 
+
 extension ProfileViewController {
     private func setConstrains() {
         NSLayoutConstraint.activate([
-            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            
-            profileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            profileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            profileButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            profileButton.heightAnchor.constraint(equalToConstant: 50)
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 }
+
+extension ProfileViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        model.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+        cell.setupCell(model: model[indexPath.row])
+        return cell
+    }
+}
+
+extension ProfileViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        UIView()
+    }
+}
+
+extension UITableView {
+    
+    func setTableHeaderView(header: UIView) {
+        self.tableHeaderView = header
+        self.tableHeaderView?.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            header.widthAnchor.constraint(equalTo: self.widthAnchor)
+        ])
+        header.setNeedsLayout()
+        header.layoutIfNeeded()
+        header.frame.size =  header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        self.tableHeaderView = header
+    }
+}
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

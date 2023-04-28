@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UIView {
     
     private var statusText: String = ""
     
@@ -100,6 +100,7 @@ class ProfileHeaderView: UIView {
     @objc private func buttonPressed() {
         statusLabel.text = statusText
         statusTextField.text = ""
+        endEditing(true)
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
@@ -114,26 +115,27 @@ class ProfileHeaderView: UIView {
 extension ProfileHeaderView {
     private func setConstrains() {
         NSLayoutConstraint.activate([
-            userPhotoImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            userPhotoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             userPhotoImageView.widthAnchor.constraint(equalToConstant: 100),
             userPhotoImageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            userNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-            userNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            userPhotoImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            userPhotoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
 
+            userNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
+            userNameLabel.leadingAnchor.constraint(equalTo: userPhotoImageView.trailingAnchor, constant: 16),
+
+            statusLabel.bottomAnchor.constraint(equalTo: statusTextField.topAnchor, constant: -5),
+            statusLabel.leadingAnchor.constraint(equalTo: userNameLabel.leadingAnchor),
+
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            statusTextField.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor, constant: -9),
+            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            statusTextField.bottomAnchor.constraint(equalTo: userPhotoImageView.bottomAnchor),
+
+            statusButton.heightAnchor.constraint(equalToConstant: 50),
             statusButton.topAnchor.constraint(equalTo: userPhotoImageView.bottomAnchor, constant: 16),
             statusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             statusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            statusButton.heightAnchor.constraint(equalToConstant: 50),
-
-            statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -60),
-            statusLabel.leadingAnchor.constraint(equalTo: userPhotoImageView.trailingAnchor, constant: 25),
-            
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
-            statusTextField.leadingAnchor.constraint(equalTo: userPhotoImageView.trailingAnchor, constant: 20),
-            statusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40)
+            statusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
 }

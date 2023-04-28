@@ -9,9 +9,6 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var post: Post = Post(title: "Мой пост")
-    
-    
     private lazy var firstButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("First Button", for: .normal)
@@ -63,13 +60,11 @@ class FeedViewController: UIViewController {
     
     @objc private func tapFirstButton() {
         let postViewController = PostViewController()
-        postViewController.post = post
         navigationController?.pushViewController(postViewController, animated: true)
     }
     
     @objc private func tapSecondButton() {
         let postViewController = PostViewController()
-        postViewController.post = post
         navigationController?.pushViewController(postViewController, animated: true)
     }
 }
