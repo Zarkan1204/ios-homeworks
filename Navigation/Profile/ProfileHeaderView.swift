@@ -11,7 +11,7 @@ final class ProfileHeaderView: UIView {
     
     private var statusText: String = ""
     
-    private let userPhotoImageView: UIImageView = {
+    private lazy var userPhotoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.8044065833, green: 0.8044064641, blue: 0.8044064641, alpha: 1)
         imageView.layer.cornerRadius = 50
@@ -19,8 +19,29 @@ final class ProfileHeaderView: UIView {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 3
         imageView.clipsToBounds = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarTap)))
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    private let backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.alpha = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "close"), for: .normal)
+        button.tintColor = .black
+        button.alpha = 0
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeButtonTap)))
+        button.isUserInteractionEnabled = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let userNameLabel: UILabel = {
@@ -88,13 +109,13 @@ final class ProfileHeaderView: UIView {
     }
     
     private func setupViews() {
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        addSubview(userPhotoImageView)
         addSubview(userNameLabel)
         addSubview(statusButton)
         addSubview(statusLabel)
         addSubview(statusTextField)
+        addSubview(backView)
+        addSubview(userPhotoImageView)
+        addSubview(closeButton)
     }
     
     @objc private func buttonPressed() {
@@ -110,6 +131,33 @@ final class ProfileHeaderView: UIView {
     @objc func hideKeyboard() {
         endEditing(true)
     }
+    
+    @objc private func avatarTap() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.userPhotoImageView.transform = CGAffineTransform(scaleX: 4, y: 4)
+            self.backView.frame = .init(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 395, height: 710))
+            self.userPhotoImageView.center = self.backView.center
+            self.userPhotoImageView.layer.cornerRadius = 0
+        }) { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.closeButton.alpha = 1
+                self.backView.alpha = 1
+            }
+        }
+    }
+    
+    @objc private func closeButtonTap() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.closeButton.alpha = 0
+        }) { _ in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.userPhotoImageView.frame = .init(origin: CGPoint(x: 16, y: 16), size: CGSize(width: 100, height: 100))
+                self.userPhotoImageView.transform = .identity
+                self.userPhotoImageView.layer.cornerRadius = 50
+                self.backView.alpha = 0
+            })
+        }
+    }
 }
 
 extension ProfileHeaderView {
@@ -120,6 +168,16 @@ extension ProfileHeaderView {
             userPhotoImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             userPhotoImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
 
+            backView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backView.topAnchor.constraint(equalTo: topAnchor),
+            backView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            closeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            closeButton.widthAnchor.constraint(equalToConstant: 30),
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            
             userNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
             userNameLabel.leadingAnchor.constraint(equalTo: userPhotoImageView.trailingAnchor, constant: 16),
 
