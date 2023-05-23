@@ -13,6 +13,7 @@
 		FA71236D29FB911B00F65460 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71236C29FB911B00F65460 /* PhotosTableViewCell.swift */; };
 		FA71236F29FB913900F65460 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71236E29FB913900F65460 /* PhotosCollectionViewCell.swift */; };
 		FA71237129FB915500F65460 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA71237029FB915500F65460 /* PhotosViewController.swift */; };
+		FA7147A22A1B9BF90081565F /* PostModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7147A12A1B9BF90081565F /* PostModalViewController.swift */; };
 		FA7394B129E0363A0058214E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7394B029E0363A0058214E /* ProfileViewController.swift */; };
 		FA7394B329E036500058214E /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7394B229E036500058214E /* FeedViewController.swift */; };
 		FA7394B529E03F810058214E /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7394B429E03F810058214E /* PostViewController.swift */; };
@@ -32,6 +33,7 @@
 		FA71236C29FB911B00F65460 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		FA71236E29FB913900F65460 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA71237029FB915500F65460 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		FA7147A12A1B9BF90081565F /* PostModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModalViewController.swift; sourceTree = "<group>"; };
 		FA7394B029E0363A0058214E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FA7394B229E036500058214E /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		FA7394B429E03F810058214E /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				FA71236C29FB911B00F65460 /* PhotosTableViewCell.swift */,
 				FA71236E29FB913900F65460 /* PhotosCollectionViewCell.swift */,
 				FA71237029FB915500F65460 /* PhotosViewController.swift */,
+				FA7147A12A1B9BF90081565F /* PostModalViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				FA7394B329E036500058214E /* FeedViewController.swift in Sources */,
 				FA71236D29FB911B00F65460 /* PhotosTableViewCell.swift in Sources */,
 				FA461F8B29F00EBA00428BCA /* LogInViewController.swift in Sources */,
+				FA7147A22A1B9BF90081565F /* PostModalViewController.swift in Sources */,
 				FA71236F29FB913900F65460 /* PhotosCollectionViewCell.swift in Sources */,
 				FA7394B129E0363A0058214E /* ProfileViewController.swift in Sources */,
 				FA2F672F29E0642200665363 /* InfoViewController.swift in Sources */,

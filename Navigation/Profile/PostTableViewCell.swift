@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol IncreaselikesDelegate: AnyObject {
+    func increaselikes(for model: inout[Post], indexPath: IndexPath)
+}
+
 class PostTableViewCell: UITableViewCell {
     
+    weak var delegate: IncreaselikesDelegate?
+    private var indexPathCell = IndexPath()
+    private var model = Post.makeModel()
     static let identifier: String = "PostTableViewCell"
     
     private let authorLabel: UILabel = {
@@ -36,6 +43,7 @@ class PostTableViewCell: UITableViewCell {
     
     private let likesLabel: UILabel = {
         let label = UILabel()
+        label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
         return label
@@ -53,6 +61,7 @@ class PostTableViewCell: UITableViewCell {
         
         setupViews()
         setConstrains()
+        addTapLikesLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -81,6 +90,20 @@ class PostTableViewCell: UITableViewCell {
         descriptionLabel.text = model.description
         likesLabel.text = "Likes: \(model.likes)"
         viewsLabel.text = "Views: \(model.views)"
+    }
+    
+    func setIndexPath(_ indexPath: IndexPath) {
+        indexPathCell = indexPath
+    }
+    
+    private func addTapLikesLabel() {
+        let tapLikesLabel = UITapGestureRecognizer(target: self, action: #selector(tapLikes))
+        likesLabel.addGestureRecognizer(tapLikesLabel)
+    }
+    
+    @objc func tapLikes() {
+        delegate?.increaselikes(for: &model, indexPath: indexPathCell)
+        likesLabel.text = "Likes: " + String(model[indexPathCell.row].likes)
     }
 }
 
