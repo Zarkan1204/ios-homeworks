@@ -101,11 +101,28 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    private let warningPasswordLabel: UILabel = {
+        let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.textColor = .gray
+        label.textAlignment = .center
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let numberPasswordCharacters = 6
+    private let correctUserName = "Chubaka"
+    private let correctPassword = "qwerty"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
         setConstrains()
+        addGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -143,15 +160,57 @@ class LogInViewController: UIViewController {
         stackView.addArrangedSubview(separatorView)
         stackView.addArrangedSubview(passwordTextField)
         contentView.addSubview(loginButton)
+        contentView.addSubview(warningPasswordLabel)
     }
     
     @objc private func loginButtonTapped() {
+        
+        if loginTextField.text?.isEmpty == true {
+            shakeTextField(to: loginTextField)
+            return
+        }
+        
+        if passwordTextField.text?.isEmpty == true {
+            shakeTextField(to: passwordTextField)
+            return
+        }
+        
+        if let password = passwordTextField.text, password.count < numberPasswordCharacters {
+            warningPasswordLabel.text = "Пароль должен быть более 5 символов"
+            warningPasswordLabel.isHidden = false
+            return
+        }
+     
+        if loginTextField.text != correctUserName || passwordTextField.text != correctPassword {
+            let alert = UIAlertController(title: "Ошибка", message: "Неправильный логин или пароль", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
         let profileViewController = ProfileViewController()
         navigationController?.pushViewController(profileViewController, animated: true)
+        warningPasswordLabel.isHidden = true
     }
 
     @objc func textFieldShouldReturn() {
         view.endEditing(true)
+    }
+    
+    private func shakeTextField(to textField: UITextField) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: textField.center.x - 10, y: textField.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 10, y: textField.center.y))
+        textField.layer.add(animation, forKey: "position")
+    }
+    
+    private func addGesture() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(textFieldShouldReturn))
+        tapScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapScreen)
     }
 }
 
@@ -198,7 +257,11 @@ extension LogInViewController {
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            warningPasswordLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10),
+            warningPasswordLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            warningPasswordLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
         ])
     }
 }

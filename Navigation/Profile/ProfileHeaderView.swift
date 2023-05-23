@@ -102,6 +102,7 @@ final class ProfileHeaderView: UIView {
         
         setupViews()
         setConstrains()
+        addGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -119,9 +120,29 @@ final class ProfileHeaderView: UIView {
     }
     
     @objc private func buttonPressed() {
-        statusLabel.text = statusText
-        statusTextField.text = ""
-        endEditing(true)
+        if statusTextField.text?.isEmpty == true {
+            shakeTextField(to: statusTextField)
+        } else {
+            statusLabel.text = statusText
+            statusTextField.text = ""
+            endEditing(true)
+        }
+    }
+    
+    private func shakeTextField(to textField: UITextField) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: textField.center.x - 10, y: textField.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 10, y: textField.center.y))
+        textField.layer.add(animation, forKey: "position")
+    }
+    
+    private func addGesture() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapScreen.cancelsTouchesInView = false
+        addGestureRecognizer(tapScreen)
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
