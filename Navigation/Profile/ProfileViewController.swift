@@ -7,9 +7,10 @@
 
 import UIKit
 
+var model = Post.makeModel()
+
 class ProfileViewController: UIViewController, IncreaselikesDelegate {
     
-    private var model = Post.makeModel()
     private let photosModel = PhotosModel.maketPhoto()
     
     private lazy var tableView: UITableView = {
@@ -93,6 +94,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             postModalVC.setupData(model: model[indexPath.row])
             tableView.reloadData()
             present(postModalVC, animated: true)
+        }
+    }
+  
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 && editingStyle == .delete {
+            model.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: . automatic)
         }
     }
 }

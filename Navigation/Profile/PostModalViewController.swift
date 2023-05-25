@@ -76,7 +76,7 @@ class PostModalViewController: UIViewController {
         authorLabel.text = model.author
         postImageView.image = UIImage(named: model.image)
         descriptionLabel.text = model.description
-        likesLabel.text = "Likes: \(model.likes)"
+        likesLabel.text = "♥ Likes: \(model.likes)"
         viewsLabel.text = "Views: \(model.views)"
     }
 }

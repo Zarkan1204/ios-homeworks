@@ -15,7 +15,6 @@ class PostTableViewCell: UITableViewCell {
     
     weak var delegate: IncreaselikesDelegate?
     private var indexPathCell = IndexPath()
-    private var model = Post.makeModel()
     static let identifier: String = "PostTableViewCell"
     
     private let authorLabel: UILabel = {
@@ -88,7 +87,7 @@ class PostTableViewCell: UITableViewCell {
         authorLabel.text = model.author
         postImageView.image = UIImage(named: model.image)
         descriptionLabel.text = model.description
-        likesLabel.text = "Likes: \(model.likes)"
+        likesLabel.text = "♥ Likes: \(model.likes)"
         viewsLabel.text = "Views: \(model.views)"
     }
     
@@ -103,7 +102,7 @@ class PostTableViewCell: UITableViewCell {
     
     @objc func tapLikes() {
         delegate?.increaselikes(for: &model, indexPath: indexPathCell)
-        likesLabel.text = "Likes: " + String(model[indexPathCell.row].likes)
+        likesLabel.text = "♥ Likes: " + String(model[indexPathCell.row].likes)
     }
 }
 
