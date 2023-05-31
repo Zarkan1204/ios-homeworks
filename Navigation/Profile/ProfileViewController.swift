@@ -11,14 +11,13 @@ var model = Post.makeModel()
 
 class ProfileViewController: UIViewController, IncreaselikesDelegate {
     
-    private let photosModel = PhotosModel.maketPhoto()
-    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.bounces = false
         tableView.dataSource = self
         tableView.delegate = self
         return tableView

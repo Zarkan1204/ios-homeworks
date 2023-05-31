@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CustomCellDelegate: AnyObject {
+    func didTapImageInCell(_ image: UIImage?, frameImage: CGRect, indexPath: IndexPath)
+}
+
 class PhotosCollectionViewCell: UICollectionViewCell {
     
     static let identifier: String = "PhotosCollectionViewCell"
@@ -23,6 +27,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
         setupContraints()
+        addGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -37,6 +42,22 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         backgroundColor = .red
         layer.cornerRadius = 15
         contentView.addSubview(photoView)
+    }
+    
+    weak var delegate: CustomCellDelegate?
+    private var indexPathCell = IndexPath()
+    
+    func setIndexPath(_ indexPath: IndexPath) {
+        indexPathCell = indexPath
+    }
+    
+    private func addGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+        photoView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func tapAction() {
+        delegate?.didTapImageInCell(photoView.image, frameImage: photoView.frame, indexPath: indexPathCell)
     }
 }
 
