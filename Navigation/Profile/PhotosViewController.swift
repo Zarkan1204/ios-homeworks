@@ -27,15 +27,15 @@ class PhotosViewController: UIViewController {
     
     private let backView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        view.backgroundColor = .white
-        view.alpha = 0.5
+        view.backgroundColor = .black
+        view.alpha = 0
         return view
     }()
     
     private lazy var closeButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 40, y: 220, width: 40, height: 40))
+        let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 40, y: 210, width: 40, height: 40))
         button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .white
         button.alpha = 0
         button.addTarget(self, action: #selector(closeButtonTap), for: .touchUpInside)
         return button
@@ -64,7 +64,7 @@ class PhotosViewController: UIViewController {
     }
     
     @objc private func closeButtonTap() {
-        animatedPhotoBack(rect: imageRect)
+        animateImageBack(rect: imageRect)
         closeButton.removeFromSuperview()
     }
     
@@ -78,7 +78,6 @@ class PhotosViewController: UIViewController {
                                           y: imageFrame.origin.y,
                                           width: imageFrame.width,
                                           height: imageFrame.height)
-        
         UIView.animate(withDuration: 0.6) {
             self.backView.alpha = 0.5
             self.animatingPhoto.frame.size = CGSize(width: UIScreen.main.bounds.width,
@@ -92,7 +91,7 @@ class PhotosViewController: UIViewController {
         }
     }
     
-    private func animatedPhotoBack(rect: CGRect) {
+    private func animateImageBack(rect: CGRect) {
         UIView.animate(withDuration: 0.6) {
             self.backView.alpha = 0
             self.animatingPhoto.frame = rect
@@ -155,14 +154,13 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotosViewController: CustomCellDelegate {
-    func didTapImageInCell(_ image: UIImage?, frameImage: CGRect, indexPath: IndexPath) {
+    func imageCellTaped(_ image: UIImage?, frameImage: CGRect, indexPath: IndexPath) {
         let rectItem = collectionView.layoutAttributesForItem(at: indexPath)
         let rectInSuperView = collectionView.convert(rectItem?.frame ?? .zero, to: collectionView.superview)
         imageRect = CGRect(x: frameImage.origin.x + rectInSuperView.origin.x,
                                   y: frameImage.origin.y + rectInSuperView.origin.y,
                                   width: frameImage.width,
                                   height: frameImage.height)
-        
         animateImage(image, imageFrame: imageRect)
     }
 }

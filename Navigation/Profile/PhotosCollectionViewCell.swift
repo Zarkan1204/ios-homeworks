@@ -8,18 +8,21 @@
 import UIKit
 
 protocol CustomCellDelegate: AnyObject {
-    func didTapImageInCell(_ image: UIImage?, frameImage: CGRect, indexPath: IndexPath)
+    func imageCellTaped(_ image: UIImage?, frameImage: CGRect, indexPath: IndexPath)
 }
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
     static let identifier: String = "PhotosCollectionViewCell"
+    weak var delegate: CustomCellDelegate?
+    private var indexPathCell = IndexPath()
     
     private let photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -44,9 +47,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(photoView)
     }
     
-    weak var delegate: CustomCellDelegate?
-    private var indexPathCell = IndexPath()
-    
     func setIndexPath(_ indexPath: IndexPath) {
         indexPathCell = indexPath
     }
@@ -57,7 +57,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
     
     @objc private func tapAction() {
-        delegate?.didTapImageInCell(photoView.image, frameImage: photoView.frame, indexPath: indexPathCell)
+        delegate?.imageCellTaped(photoView.image, frameImage: photoView.frame, indexPath: indexPathCell)
     }
 }
 
