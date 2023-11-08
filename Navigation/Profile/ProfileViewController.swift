@@ -23,6 +23,8 @@ class ProfileViewController: UIViewController, IncreaselikesDelegate {
         return tableView
     }()
     
+    // MARK: - LifeCikle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
